@@ -1,0 +1,45 @@
+.wrapper {
+    padding: 20px;
+}
+
+.jumbotron {
+    background-color: rgb(49, 21, 21);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin: 20px;
+}
+
+/* #train-table th,
+td {
+  display: inline-block;
+  width: 16.575%;
+} */
+
+.form-control {
+    font-style: strong;
+}
+
+.card-header {
+    background-color: aqua;
+    color: white;
+}
+
+/* .button,
+.div,
+.form,
+.input {
+    margin: 10px;
+    padding: 10px;
+} */
+
+footer {
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    height: 60px;
+    padding: 10px;
+}
