@@ -30,32 +30,41 @@ $("#add-train-btn").on("click", function (event) {
     // Grab user input
     trainName = $("#train-name-input").val().trim();
     trainDest = $("#train-dest-input").val().trim();
-//    trainFirst = moment($("#train-first-input").val().trim(), "HH:mm");
+    //    trainFirst = moment($("#train-first-input").val().trim(), "HH:mm");
     trainFirst = $("#train-first-input").val().trim();
     trainFreq = $("#train-freq-input").val().trim();
 
-    // Create local "temporary" object for holding train data
-    var newTrain = {
-        name: trainName,
-        dest: trainDest,
-        first: trainFirst,
-        freq: trainFreq
-    };
+    // Validate user input
+    if (!moment(trainFirst, "HH:mm", true).isValid()) {
+       $("#train-first-input").val("Please enter a valid 24-hour time! ('HH:mm')");
+    }
+    // else if (trainFreq < 10 || trainFreq > (12 * 60)) {
+    //     $("#train-freq-input").val("Please enter number of minutes! (10-720)");
+    // }
+    else {
+        // Create local "temporary" object for holding train data
+        var newTrain = {
+            name: trainName,
+            dest: trainDest,
+            first: trainFirst,
+            freq: trainFreq
+        };
 
-    // Upload train data to the database
-    database.ref().push(newTrain);
-    // Log database to console
-    console.log("database");
-    console.log("newTrain.name - "+newTrain.name);
-    console.log("newTrain.dest - "+newTrain.dest);
-    console.log("newTrain.first - "+newTrain.first);
-    console.log("newTrain.freq - "+newTrain.freq);
+        // Upload train data to the database
+        database.ref().push(newTrain);
+        // Log database to console
+        console.log("database");
+        console.log("newTrain.name - " + newTrain.name);
+        console.log("newTrain.dest - " + newTrain.dest);
+        console.log("newTrain.first - " + newTrain.first);
+        console.log("newTrain.freq - " + newTrain.freq);
 
-    // Clear all text-boxes
-    $("#train-name-input").val("");
-    $("#train-dest-input").val("");
-    $("#train-first-input").val("");
-    $("#train-freq-input").val("");
+        // Clear all text-boxes
+        $("#train-name-input").val("");
+        $("#train-dest-input").val("");
+        $("#train-first-input").val("");
+        $("#train-freq-input").val("");
+    }
 });
 
 // Create Firebase event for adding train to database, and row in the html when a user adds an entry
@@ -69,10 +78,10 @@ database.ref().on("child_added", function (childSnapshot) {
     var tFreq = childSnapshot.val().freq;
     // Log childSnapshot to console
     console.log("childSnapshot");
-    console.log("tName - "+tName);
-    console.log("tDest - "+tDest);
-    console.log("tFirst - "+tFirst);
-    console.log("tFreq - "+tFreq);
+    console.log("tName - " + tName);
+    console.log("tDest - " + tDest);
+    console.log("tFirst - " + tFirst);
+    console.log("tFreq - " + tFreq);
 
 
     // // // To calculate the months worked
@@ -86,33 +95,33 @@ database.ref().on("child_added", function (childSnapshot) {
     // Calculate minutes until next train
     // First Time (pushed back 1 day to insure it's before current time)
     var tFirstConv = moment(tFirst, "minutes").subtract(1, "days");
-    // Difference between the times
+    // Difference between first train and now
     var tDiff = moment().diff(moment(tFirstConv), "minutes");
     // Time apart (remainder)
     var tRemain = tDiff % tFreq;
-    // Minute Until Train
+    // Minutes until next train
     var tMins = tFreq - tRemain;
-    // Next Train
+    // Time next train time
     var tNext = moment().add(tMins, "minutes");
     // Log train calculation
     console.log("calculation");
-    console.log("tFirstConv - "+tFirstConv);
-    console.log("tDiff - "+tDiff);
-    console.log("tRemain - "+tDiff);
-    console.log("tMins - "+tMins);
-    console.log("tNext - "+tNext);
+    console.log("tFirstConv - " + tFirstConv);
+    console.log("tDiff - " + tDiff);
+    console.log("tRemain - " + tRemain);
+    console.log("tMins - " + tMins);
+    console.log("tNext - " + tNext);
 
     // var tSinceFirst = moment().diff(moment(tFirst, "X"), "minutes");
     // Prettify next train
-    // var tNextPretty = moment.unix(tNext).format("HH:mm");
+    var tNextPretty = moment(tNext).format("LT");
 
     // Create new table row
     var newRow = $("<tr>").append(
         $("<td>").text(tName),
         $("<td>").text(tDest),
         $("<td>").text(tFreq),
-        $("<td>").text(tNext),
-        // $("<td>").text(tNextPretty),
+        // $("<td>").text(tNext),
+        $("<td>").text(tNextPretty),
         $("<td>").text(tMins),
     );
 

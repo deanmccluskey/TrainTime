@@ -3,7 +3,7 @@
 }
 
 .jumbotron {
-    background-color: rgb(49, 21, 21);
+    background-color: rgb(95, 40, 40);
     color: white;
     text-align: center;
 }
@@ -23,7 +23,7 @@ td {
 }
 
 .card-header {
-    background-color: aqua;
+    background-color: rgb(29, 122, 165);
     color: white;
 }
 
@@ -36,7 +36,7 @@ td {
 } */
 
 footer {
-    background-color: black;
+    background-color:  rgb(95, 40, 40);
     color: white;
     font-size: 15px;
     text-align: center;
