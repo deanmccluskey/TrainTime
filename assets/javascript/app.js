@@ -93,7 +93,7 @@ database.ref().on("child_added", function (childSnapshot) {
     // console.log(empBilled);
 
     // Calculate minutes until next train
-    // First Time (pushed back 1 day to insure it's before current time)
+    // First train time (pushed back 1 day to insure it's before current time)
     var tFirstConv = moment(tFirst, "minutes").subtract(1, "days");
     // Difference between first train and now
     var tDiff = moment().diff(moment(tFirstConv), "minutes");
@@ -101,7 +101,7 @@ database.ref().on("child_added", function (childSnapshot) {
     var tRemain = tDiff % tFreq;
     // Minutes until next train
     var tMins = tFreq - tRemain;
-    // Time next train time
+    // Next train time
     var tNext = moment().add(tMins, "minutes");
     // Log train calculation
     console.log("calculation");
@@ -111,7 +111,6 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log("tMins - " + tMins);
     console.log("tNext - " + tNext);
 
-    // var tSinceFirst = moment().diff(moment(tFirst, "X"), "minutes");
     // Prettify next train
     var tNextPretty = moment(tNext).format("LT");
 
