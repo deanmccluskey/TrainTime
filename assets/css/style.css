@@ -12,12 +12,6 @@
     margin: 20px;
 }
 
-/* #train-table th,
-td {
-  display: inline-block;
-  width: 16.575%;
-} */
-
 .form-control {
     font-style: strong;
 }
@@ -26,14 +20,6 @@ td {
     background-color: rgb(29, 122, 165);
     color: white;
 }
-
-/* .button,
-.div,
-.form,
-.input {
-    margin: 10px;
-    padding: 10px;
-} */
 
 footer {
     background-color:  rgb(95, 40, 40);

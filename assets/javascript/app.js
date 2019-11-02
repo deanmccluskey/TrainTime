@@ -36,7 +36,7 @@ $("#add-train-btn").on("click", function (event) {
 
     // Validate user input
     if (!moment(trainFirst, "HH:mm", true).isValid()) {
-       $("#train-first-input").val("Please enter a valid 24-hour time! ('HH:mm')");
+        $("#train-first-input").val("Please enter a valid 24-hour time! ('HH:mm')");
     }
     // else if (trainFreq < 10 || trainFreq > (12 * 60)) {
     //     $("#train-freq-input").val("Please enter number of minutes! (10-720)");
@@ -83,15 +83,6 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log("tFirst - " + tFirst);
     console.log("tFreq - " + tFreq);
 
-
-    // // // To calculate the months worked
-    //  var empMonths = moment().diff(moment(trainFirst, "X"), "minutes");
-    // console.log(empMonths);
-
-    // // Calculate the total billed rate
-    // var empBilled = empMonths * empRate;
-    // console.log(empBilled);
-
     // Calculate minutes until next train
     // First train time (pushed back 1 day to insure it's before current time)
     var tFirstConv = moment(tFirst, "minutes").subtract(1, "days");
@@ -132,12 +123,3 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log("Errors handled: " + errorObject.code);
 
 });
-
-// Example Time Math
-// -----------------------------------------------------------------------------
-// Assume Employee start date of January 1, 2015
-// Assume current date is March 1, 2016
-
-// We know that this is 15 months.
-// Now we will create code in moment.js to confirm that any attempt we use meets this test case
-
